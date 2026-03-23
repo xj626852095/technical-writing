@@ -71,11 +71,11 @@ Think of README sections as a hierarchy of importance:
 
 ```
                  │
-      Optional   ───┤── Contributing, License, Changelog
+      Essential  ───┤── Title, Overview, Quick Start, Usage                 
                  │
       Common     ───┤── Features, Architecture, Testing, FAQ, etc.
                  │
-      Essential  ───┤── Title, Overview, Quick Start, Usage
+      Optional   ───┤── Contributing, License, Changelog
                  │
 ─────────────────┴─────────────────
 ```
