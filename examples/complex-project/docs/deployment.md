@@ -1,21 +1,24 @@
 # Deployment Guide
 
-> Deployment instructions for the E-Commerce Platform
-
 ## Overview
 
-This guide covers deploying the E-Commerce Platform to different environments.
+This guide covers deploying the E-Commerce Platform across different environments.
 
 ## Prerequisites
 
-- Docker 20.x+
+- Docker 20.x or higher
+- Docker Compose 2.x or higher
 - Kubernetes cluster (for production)
-- kubectl configured
-- AWS/GCP/Azure account (for cloud deployment)
+- kubectl configured (for production)
+- Cloud provider account (AWS/GCP/Azure)
 
-## Environment Setup
+## Development Deployment
 
-### Development Environment
+### Local Development
+
+For local development setup, see the main README Quick Start section.
+
+### Docker Compose (Development)
 
 The development environment runs locally using Docker Compose:
 
@@ -30,7 +33,9 @@ docker-compose logs -f
 docker-compose down
 ```
 
-### Staging Environment
+## Staging Deployment
+
+### Environment Setup
 
 ```bash
 # Deploy to staging
@@ -43,7 +48,17 @@ kubectl get pods -n staging
 kubectl port-forward svc/api-gateway 3000:3000 -n staging
 ```
 
-### Production Environment
+### Deployment Steps
+
+1. Ensure all prerequisites are installed
+2. Configure environment variables for staging
+3. Apply Kubernetes manifests: `kubectl apply -f k8s/staging/`
+4. Verify all pods are running: `kubectl get pods -n staging`
+5. Test the staging environment
+
+## Production Deployment
+
+### Environment Setup
 
 ```bash
 # Deploy to production
@@ -56,31 +71,14 @@ kubectl get pods -n production
 kubectl rollout status deployment/api-gateway -n production
 ```
 
-## Configuration
+### Deployment Steps
 
-### Environment Variables
-
-Each service requires specific environment variables:
-
-| Variable | Description | Required |
-|----------|-------------|----------|
-| `DATABASE_URL` | PostgreSQL connection string | Yes |
-| `REDIS_URL` | Redis connection string | Yes |
-| `RABBITMQ_URL` | RabbitMQ connection string | Yes |
-| `JWT_SECRET` | JWT signing secret | Yes |
-| `PAYMENT_GATEWAY_KEY` | Payment gateway API key | Yes |
-
-### Secrets Management
-
-Use Kubernetes secrets for sensitive data:
-
-```bash
-# Create secret
-kubectl create secret generic app-secrets \
-  --from-literal=jwt-secret=YOUR_SECRET \
-  --from-literal=database-url=YOUR_DB_URL \
-  -n production
-```
+1. Ensure all prerequisites are installed
+2. Configure production environment variables and secrets
+3. Create Kubernetes secrets: `kubectl create secret generic app-secrets -n production`
+4. Apply Kubernetes manifests: `kubectl apply -f k8s/production/`
+5. Verify deployment health: `kubectl get pods -n production`
+6. Configure monitoring and alerting
 
 ## Scaling
 
@@ -94,20 +92,6 @@ kubectl scale deployment order-service --replicas=3 -n production
 kubectl autoscale deployment order-service \
   --cpu-percent=70 \
   --min=2 --max=10 -n production
-```
-
-### Vertical Scaling
-
-Adjust resource requests in deployment manifests:
-
-```yaml
-resources:
-  requests:
-    cpu: "500m"
-    memory: "512Mi"
-  limits:
-    cpu: "2000m"
-    memory: "2Gi"
 ```
 
 ## Monitoring
@@ -130,16 +114,6 @@ kubectl logs -f deployment/order-service -n production
 
 # View all logs
 kubectl logs -l app=ecommerce -n production --all-containers=true
-```
-
-## Rollback
-
-```bash
-# Rollback to previous version
-kubectl rollout undo deployment/order-service -n production
-
-# Rollback to specific revision
-kubectl rollout undo deployment/order-service --to-revision=2 -n production
 ```
 
 ## Troubleshooting
@@ -166,7 +140,5 @@ kubectl get ingress -n production
 
 ## See Also
 
-- [User Management Deployment](../modules/user-management/#deployment)
-- [Product Catalog Deployment](../modules/product-catalog/#deployment)
-- [Order Processing Deployment](../modules/order-processing/#deployment)
-- [Payment Processing Deployment](../modules/payment-processing/#deployment)
+- [Main README](../../README.md)
+- [Individual module documentation](../../modules/)
