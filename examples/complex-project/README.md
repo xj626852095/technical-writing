@@ -77,10 +77,10 @@ The application will be available at http://localhost:3000
 
 | Module | Description | Documentation |
 |--------|-------------|---------------|
-| [User Management](modules/user-management/) | Authentication, profiles, preferences | [详细文档 →](modules/user-management/) |
-| [Product Catalog](modules/product-catalog/) | Products, categories, search | [详细文档 →](modules/product-catalog/) |
-| [Order Processing](modules/order-processing/) | Cart, checkout, orders | [详细文档 →](modules/order-processing/) |
-| [Payment Processing](modules/payment-processing/) | Payment gateways, transactions | [详细文档 →](modules/payment-processing/) |
+| [User Management](modules/user-management/) | Authentication, profiles, preferences | [Docs →](modules/user-management/) |
+| [Product Catalog](modules/product-catalog/) | Products, categories, search | [Docs →](modules/product-catalog/) |
+| [Order Processing](modules/order-processing/) | Cart, checkout, orders | [Docs →](modules/order-processing/) |
+| [Payment Processing](modules/payment-processing/) | Payment gateways, transactions | [Docs →](modules/payment-processing/) |
 
 ## Development
 
