@@ -22,4 +22,4 @@ npm run dev
 
 ## API Documentation
 
-See [API Docs](../../docs/api/service-a.md)
+This is a legacy service. See [User Management](../user-management/) for current authentication implementation.

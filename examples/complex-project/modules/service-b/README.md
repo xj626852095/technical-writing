@@ -22,4 +22,4 @@ uvicorn main:app --reload
 
 ## API Documentation
 
-See [API Docs](../../docs/api/service-b.md)
+This is a legacy service. See [Product Catalog](../product-catalog/) for current product service implementation.
