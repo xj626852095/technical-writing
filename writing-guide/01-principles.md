@@ -89,41 +89,116 @@ This ensures your README has a solid foundation while staying flexible for diffe
 
 ## Common Pitfalls
 
-### ❌ Assuming too much knowledge
-```markdown
-# Bad: Assumes reader knows your jargon
-Connect to the FLDB and query the UM.
-```
+### 1. Missing the "Why"
 
-```markdown
-# Good: Explains terms
-Connect to the Feature Database (FLDB) and query the User Management (UM) table.
-```
+Just showing commands without explaining what they do or why they're needed.
 
-### ❌ Writing novels
+**❌ Bad:**
 ```markdown
-# Bad: 50 paragraphs before any useful information
-The history of authentication begins in ancient times...
-```
-
-```markdown
-# Good: Gets to the point immediately
-## Authentication
-This API uses JWT tokens for authentication. Include your token in the Authorization header.
-```
-
-### ❌ Being too brief
-```markdown
-# Bad: One-line command with no context
 npm install
+npm run build
+docker-compose up -d
 ```
 
+**✅ Good:**
 ```markdown
-# Good: Explains what and why
 # Install dependencies
 npm install
 
-This installs all required packages listed in package.json.
+# Build the production bundle
+npm run build
+
+# Start the database and API services
+docker-compose up -d
+```
+
+---
+
+### 2. Incomplete Examples
+
+Code snippets that don't work on their own or skip important context.
+
+**❌ Bad:**
+```markdown
+To fetch a user:
+```javascript
+const user = await fetchUser(id);
+```
+```
+
+**✅ Good:**
+```markdown
+To fetch a user:
+```javascript
+const { api } = require('./client');
+
+const user = await api.users.get(id);
+console.log(user.name); // "Alice"
+```
+```
+
+---
+
+### 3. Unexplained Terms
+
+Using jargon, acronyms, or technical terms without definition.
+
+**❌ Bad:**
+```markdown
+The FLDB stores UM records indexed by UID.
+```
+
+**✅ Good:**
+```markdown
+The Feature Location Database (FLDB) stores User Management (UM) records indexed by unique User ID (UID).
+```
+
+---
+
+### 4. Buried Lead
+
+Hiding important information in walls of text instead of leading with it.
+
+**❌ Bad:**
+```markdown
+## Getting Started
+
+Welcome to our project! We started building this in 2020 after years of research.
+Our team believes that documentation is important... [20 paragraphs later] ...
+To install: npm install
+```
+
+**✅ Good:**
+```markdown
+## Quick Start
+
+```bash
+git clone repo
+cd project
+npm install
+npm start
+```
+
+For background on the project, see [About](#about).
+```
+
+---
+
+### 5. Outdated Content
+
+Documentation that no longer matches the current code or reality.
+
+**❌ Bad:**
+```markdown
+# Authentication (Last updated: 2019)
+Use API keys in the header.
+```
+*(Code now uses OAuth)*
+
+**✅ Good:**
+```markdown
+# Authentication (Last updated: 2024-03-23)
+We use OAuth 2.0 for authentication. Include your bearer token in the Authorization header.
 ```
 
 ## Documentation Quality Checklist
