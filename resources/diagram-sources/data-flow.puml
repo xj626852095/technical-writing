@@ -1,0 +1,21 @@
+@startuml
+title Data Flow Diagram
+
+actor "User" as User
+participant "API Gateway" as API
+queue "Message Queue" as MQ
+participant "Worker Service" as Worker
+database "Database" as DB
+file "Log Storage" as Logs
+
+User -> API: POST /data
+API -> MQ: Publish message
+MQ -> Worker: Process message
+Worker -> DB: Store data
+DB --> Worker: Confirmation
+Worker -> Logs: Write log
+Worker -> MQ: Acknowledge
+MQ --> API: Notification (optional)
+API --> User: Response (202 Accepted)
+
+@enduml

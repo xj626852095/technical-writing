@@ -1,0 +1,40 @@
+@startuml
+title Layered Architecture
+
+package "Presentation Layer" {
+  [Web UI]
+  [Mobile App]
+  [API Gateway]
+}
+
+package "Application Layer" {
+  [Service A]
+  [Service B]
+  [Service C]
+}
+
+package "Domain Layer" {
+  [Domain Models]
+  [Business Logic]
+}
+
+package "Data Layer" {
+  database [Database]
+  file [File Storage]
+}
+
+[Web UI] --> [API Gateway]
+[Mobile App] --> [API Gateway]
+[API Gateway] --> [Service A]
+[API Gateway] --> [Service B]
+[API Gateway] --> [Service C]
+
+[Service A] --> [Business Logic]
+[Service B] --> [Business Logic]
+[Service C] --> [Business Logic]
+
+[Business Logic] --> [Domain Models]
+[Domain Models] --> [Database]
+[Business Logic] --> [File Storage]
+
+@enduml

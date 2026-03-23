@@ -1,0 +1,39 @@
+@startuml
+title Microservices Architecture
+
+rectangle "API Gateway" {
+  component [API Gateway]
+}
+
+rectangle "Services" {
+  component [Auth Service]
+  component [User Service]
+  component [Order Service]
+  component [Payment Service]
+}
+
+database "Databases" {
+  database [Auth DB]
+  database [User DB]
+  database [Order DB]
+  database [Payment DB]
+}
+
+queue "Message Queue" {
+  queue [Events]
+}
+
+[API Gateway] --> [Auth Service]
+[API Gateway] --> [User Service]
+[API Gateway] --> [Order Service]
+[Order Service] --> [Payment Service]
+
+[Auth Service] --> [Auth DB]
+[User Service] --> [User DB]
+[Order Service] --> [Order DB]
+[Payment Service] --> [Payment DB]
+
+[Order Service] --> [Events] : Publish
+[Payment Service] --> [Events] : Publish
+
+@enduml
