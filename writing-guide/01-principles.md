@@ -95,7 +95,7 @@ Before publishing documentation, verify:
 - [ ] Are code examples complete and working?
 - [ ] Is technical terminology explained or linked?
 - [ ] Is the structure logical and scannable?
-- [ ] Will this be accurate in 6 months?
+- [ ] Can this be easily updated when the code changes?
 
 ## See Also
 
