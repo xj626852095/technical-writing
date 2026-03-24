@@ -15,7 +15,62 @@ The system follows an event-driven microservices architecture with API Gateway p
 <img src="docs/images/architecture-1.png" style="max-width:50%;" />
 <img src="docs/images/architecture-2.png" style="max-width:50%;" />
 
-The system consists of 4 core functional modules:
+### Architecture Decisions
+
+**Why Microservices Architecture?**
+
+The platform uses microservices to enable independent development, deployment, and scaling of business capabilities:
+
+- **Team autonomy:** Each service can be owned and developed by independent teams
+- **Technology diversity:** Services use optimal languages (Node.js, Python, Go) for their requirements
+- **Fault isolation:** Failure in one service doesn't crash the entire platform
+- **Independent scaling:** High-traffic services (e.g., Product Catalog) can scale without affecting others
+
+*Trade-off:* Increased operational complexity. We mitigate this with Docker, standardized deployment patterns, and comprehensive monitoring.
+
+**Why Event-Driven Communication?**
+
+Services communicate asynchronously via message queues (RabbitMQ) for loose coupling:
+
+- **Decoupling:** Services don't need to know about each other's APIs or availability
+- **Resilience:** Messages are buffered when services are down, preventing data loss
+- **Scalability:** Multiple consumers can process messages in parallel
+- **Auditability:** All service interactions are logged via message events
+
+*Trade-off:* Eventually consistent data model. Critical paths use Sagas with compensating transactions to ensure consistency.
+
+**Why API Gateway Pattern?**
+
+Kong API Gateway serves as the single entry point for all client requests:
+
+- **Centralized concerns:** Authentication, rate limiting, and routing handled in one place
+- **Protocol translation:** Clients use HTTP/REST while backend services may use different protocols
+- **Service abstraction:** Internal service changes don't affect client integrations
+- **Cross-cutting features:** CORS, logging, and metrics applied uniformly
+
+**Why Database per Service?**
+
+Each service owns its database schema and data access:
+
+- **Autonomy:** Teams can evolve their data models without coordinating with other teams
+- **Technology fit:** Services use optimal databases (PostgreSQL for relational, Redis for caching, Elasticsearch for search)
+- **Fault containment:** Database issues in one service don't affect others
+- **Independent deployment:** Schema changes don't require coordinated deployments
+
+**Why Polyglot Services?**
+
+Different services use different languages based on their requirements:
+
+| Service | Language | Rationale |
+|---------|----------|-----------|
+| User Service | Node.js + Express | Fast I/O, good auth ecosystem, shares code with frontend |
+| Product Service | Python + FastAPI | Data processing libraries, fast development, async support |
+| Order Service | Node.js + Express | Transactional workflow, shares User service patterns |
+| Payment Service | Node.js + Express | Security libraries, PCI-DSS compliance ecosystem |
+| Inventory Service | Go | High performance, low latency, efficient concurrency |
+
+### Core Functional Modules
+
 - **User Management** - Authentication, authorization, and user profiles
 - **Product Catalog** - Product search, categorization, and inventory display
 - **Order Processing** - Cart, checkout, and order lifecycle management

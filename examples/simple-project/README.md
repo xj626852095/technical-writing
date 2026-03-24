@@ -26,11 +26,48 @@ The TaskQueue is built around a producer-consumer pattern with an event-driven a
 <img src="docs/images/architecture-1.png" style="max-width:50%;" />
 <img src="docs/images/architecture-2.png" style="max-width:50%;" />
 
-The system is structured as follows:
+### Architecture Decisions
+
+**Why Producer-Consumer Pattern?**
+
+The producer-consumer pattern was chosen to decouple task submission from task execution. This design enables:
+
+- **Non-blocking submission:** Producers can add tasks without waiting for execution
+- **Load leveling:** The queue smooths out bursts of tasks, preventing system overload
+- **Independent scaling:** Producers and consumers can scale independently
+
+**Why In-Memory Design?**
+
+TaskQueue uses an in-memory queue for simplicity and performance:
+
+- **Zero dependencies:** No external infrastructure required (Redis, database, etc.)
+- **Low latency:** Sub-millisecond job scheduling without network overhead
+- **Simple deployment:** Single package with no setup complexity
+
+*Trade-off:* Jobs are lost on process crashes. This is acceptable for non-critical background tasks where occasional job loss is tolerable.
+
+**Why Event-Driven Architecture?**
+
+The event system enables loose coupling between the queue and application logic:
+
+- **Observability:** Applications can monitor job lifecycle without polling
+- **Extensibility:** New behaviors can be added by listening to events
+- **Debugging:** Event logs provide visibility into queue behavior
+
+**Why Exponential Backoff for Retries?**
+
+Failed jobs are retried with exponential backoff to handle transient failures:
+
+- **Transient errors:** Network issues and temporary service failures often resolve quickly
+- **Backoff pressure:** Prevents overwhelming failing services with immediate retries
+- **Jitter:** Randomized delays prevent thundering herd problems
+
+### System Components
+
 - **Queue Manager** - Manages the in-memory queue and job scheduling
 - **Worker Pool** - Executes jobs with configurable concurrency
-- **Retry Handler** - Manages failed job retry logic
-- **Event Emitter** - Publishes job lifecycle events
+- **Retry Handler** - Manages failed job retry logic with exponential backoff
+- **Event Emitter** - Publishes job lifecycle events (queued, started, progress, complete, failed)
 
 ## Tech Stack
 
