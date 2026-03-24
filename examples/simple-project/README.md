@@ -23,7 +23,8 @@ Perfect for background job processing in web servers, microservices, or any appl
 
 The TaskQueue is built around a producer-consumer pattern with an event-driven architecture:
 
-![Architecture](docs/images/architecture.png)
+<img src="docs/images/architecture-1.png" style="max-width:50%;" />
+<img src="docs/images/architecture-2.png" style="max-width:50%;" />
 
 The system is structured as follows:
 - **Queue Manager** - Manages the in-memory queue and job scheduling

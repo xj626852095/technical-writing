@@ -12,7 +12,8 @@ The platform is designed for high availability, with horizontal scaling capabili
 
 The system follows an event-driven microservices architecture with API Gateway pattern:
 
-![System Architecture](docs/images/architecture.png)
+<img src="docs/images/architecture-1.png" style="max-width:50%;" />
+<img src="docs/images/architecture-2.png" style="max-width:50%;" />
 
 The system consists of 4 core functional modules:
 - **User Management** - Authentication, authorization, and user profiles
