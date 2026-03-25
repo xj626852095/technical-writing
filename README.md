@@ -29,7 +29,7 @@ technical-writing/
     └── diagram-sources/        # Reusable diagram templates
 ```
 
-## Writing Guide
+## Writing  Guide
 
 Complete documentation writing guidelines: [Writing Guide](writing-guide/)
 
