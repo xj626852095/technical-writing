@@ -24,12 +24,14 @@ technical-writing/
 ├── examples/                   # Example projects
 │   ├── simple-project/         # Simple project example
 │   └── complex-project/        # Complex project example
-└── resources/                  # Templates and diagram sources
-    ├── templates/              # Copy-ready templates
-    └── diagram-sources/        # Reusable diagram templates
+├── resources/                  # Templates and diagram sources
+│   ├── templates/              # Copy-ready templates
+│   └── diagram-sources/        # Reusable diagram templates
+└── docs/                       # Design and planning documents
+    └── plans/                  # Implementation plans
 ```
 
-## Writing  Guide
+## Writing Guide
 
 Complete documentation writing guidelines: [Writing Guide](writing-guide/)
 
@@ -63,6 +65,7 @@ Copy-ready templates for common document types: [Templates](resources/templates/
 - [Architecture Document Template](resources/templates/architecture-doc.md)
 - [Development Guide Template](resources/templates/development-guide.md)
 - [Deployment Guide Template](resources/templates/deployment-guide.md)
+- [Architecture Decision Record Template](resources/templates/architecture-decision-record.md)
 
 ## Diagram Sources
 

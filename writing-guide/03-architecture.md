@@ -168,4 +168,4 @@ The system uses a producer-consumer pattern:
 
 - [Creating Diagrams](06-diagrams.md) - How to create effective diagrams
 - [README Documentation](02-readme.md) - Architecture section in README
-- [Complex Project Example](../examples/complex-project/docs/architecture.md)
+- [Complex Project Example](../examples/complex-project/README.md) - Architecture section in main README

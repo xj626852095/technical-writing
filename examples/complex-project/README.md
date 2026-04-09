@@ -111,19 +111,19 @@ For detailed architecture documentation, see individual module documentation.
 git clone https://github.com/example/ecommerce-platform.git
 cd ecommerce-platform
 
-# Start infrastructure services
+# Start infrastructure services (PostgreSQL, Redis, RabbitMQ, Elasticsearch)
 docker-compose up -d postgres redis rabbitmq elasticsearch
 
 # Install dependencies for each service
 make install-all
 
-# Set up environment
+# Set up environment variables
 cp .env.example .env
 
-# Initialize databases
+# Initialize databases with migrations
 make db-migrate
 
-# Start all services
+# Start all microservices
 make start-all
 ```
 

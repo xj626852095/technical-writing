@@ -117,6 +117,122 @@ images/
 - <img src="../resources/diagram-sources/c4-component.png" style="max-width:60%;" />
 
 
+## Accessibility
+
+Diagrams should be accessible to all users, including those with visual impairments or color vision deficiencies.
+
+### Color Choices
+
+Use color-blind friendly palettes:
+
+**Recommended Colors (Safe for All Types):**
+
+| Color | Hex | Use Case |
+|-------|-----|----------|
+| Blue | #0052CC | Primary elements, flow |
+| Orange | #FF991F | Highlights, warnings |
+| Green | #00875A | Success, positive paths |
+| Red | #DE350B | Errors, negative paths |
+| Purple | #6554C0 | Secondary elements |
+| Gray | #42526E | Neutral, background |
+
+**Avoid:**
+- Red/green combinations (problematic for red-green color blindness)
+- Reliance on color alone to convey meaning
+- Low contrast color combinations
+
+### Contrast Requirements
+
+Ensure sufficient contrast between elements:
+
+- **Text and background:** Minimum 4.5:1 contrast ratio
+- **Important elements:** Minimum 7:1 contrast ratio
+- **Lines and shapes:** Use distinct borders when colors are similar
+
+**Testing Tools:**
+- WebAIM Contrast Checker: https://webaim.org/resources/contrastchecker/
+- Chrome DevTools Lighthouse audit
+- Color Oracle simulator (simulates color blindness)
+
+### Alternative Text
+
+All diagrams must have descriptive alt text:
+
+```markdown
+![Architecture diagram showing three-tier system with load balancer,
+application servers, and database cluster](images/architecture.png)
+```
+
+**Guidelines:**
+- Describe the purpose of the diagram
+- Mention key components and relationships
+- Keep under 125 characters when possible
+- Avoid "image of" or "diagram showing" redundancies
+
+### Patterns and Textures
+
+Don't rely on color alone:
+
+```markdown
+Use patterns to distinguish elements:
+- Solid fill: Primary elements
+- Striped: Secondary elements
+- Dotted border: Optional/external elements
+- Hatched: Deprecated elements
+```
+
+### Vector vs Raster
+
+Choose appropriate format:
+
+| Format | When to Use | Accessibility Benefits |
+|--------|-------------|------------------------|
+| SVG (vector) | Icons, simple diagrams | Scalable, can be read by screen readers |
+| PNG (raster) | Complex diagrams, screenshots | Fixed appearance, compatible alt text |
+
+### Text in Diagrams
+
+Keep text in diagrams accessible:
+
+- **Minimum font size:** 14px at 100% zoom
+- **High contrast:** Dark text on light background or vice versa
+- **Avoid decorative fonts:** Use sans-serif fonts
+- **Limit text:** Use legends and labels instead
+
+**Best Practice:**
+```markdown
+Place explanatory text outside the diagram:
+
+❌ Bad: Long explanations inside diagram boxes
+
+✅ Good: Concise labels in diagram, detailed legend below
+```
+
+### Testing for Accessibility
+
+**Manual Checklist:**
+- [ ] All images have alt text
+- [ ] Colors have sufficient contrast
+- [ ] Information not conveyed by color alone
+- [ ] Text is readable at 100% zoom
+- [ ] Diagram makes sense when grayscale
+- [ ] SVG files have title/desc tags
+
+**Automated Checks:**
+```bash
+# Check alt text with markdown linter
+markdownlint docs/**/*.md --rule MD045
+
+# Verify image files exist
+markdown-link-check docs/**/*.md
+```
+
+**Grayscale Test:**
+Convert diagram to grayscale to ensure information remains clear:
+- draw.io: View → Format Diagram → Grayscale
+- Check that all elements are distinguishable
+
+
 ## See Also
 
 - [draw.io Examples](https://www.drawio.com/example-diagrams) - Browse by category

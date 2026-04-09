@@ -286,4 +286,4 @@ curl -X POST https://api.example.com/v1/users \
 
 - [Creating Diagrams](06-diagrams.md) - Sequence diagrams for API flows
 - [Style Guide](07-style-guide.md) - Writing conventions
-- [Complex Project Example](../examples/complex-project/docs/api/)
+- [Complex Project Example](../examples/complex-project/README.md) - See module API documentation

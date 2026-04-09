@@ -15,6 +15,9 @@ This guide covers everything you need to know about creating clear, consistent, 
 5. **[API Documentation](05-api-docs.md)** - Writing clear API documentation
 6. **[Creating Diagrams](06-diagrams.md)** - When and how to use diagrams effectively
 7. **[Style Guide](07-style-guide.md)** - Writing style and formatting conventions
+8. **[Review Process](08-review-process.md)** - Documentation quality assurance through peer review
+9. **[Metrics](09-metrics.md)** - Measuring and improving documentation quality
+10. **[Version Control](10-version-control.md)** - Managing documentation versions with your code
 
 ## How to Use This Guide
 

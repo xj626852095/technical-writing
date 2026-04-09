@@ -116,17 +116,17 @@ The application will start processing tasks immediately.
 ```javascript
 const { TaskQueue } = require('./src/index');
 
-// Create a queue with concurrency of 2
+// Create a queue that processes 2 jobs concurrently
 const queue = new TaskQueue({ concurrency: 2 });
 
-// Add a task
+// Add a task to the queue
 queue.add(async () => {
   console.log('Processing task...');
-  await delay(1000);
+  await delay(1000);  // Simulate work
   console.log('Task complete!');
 });
 
-// Start processing
+// Start processing queued tasks
 queue.start();
 ```
 
@@ -135,13 +135,14 @@ queue.start();
 ```javascript
 const { TaskQueue, JobPriority } = require('./src/index');
 
+// Create a queue with custom configuration
 const queue = new TaskQueue({
-  concurrency: 5,
-  retries: 3,
-  retryDelay: 1000,
+  concurrency: 5,     // Process up to 5 jobs in parallel
+  retries: 3,         // Retry failed jobs up to 3 times
+  retryDelay: 1000,   // Wait 1 second before retrying
 });
 
-// Listen to events
+// Listen to job lifecycle events
 queue.on('job:complete', (job) => {
   console.log(`Job ${job.id} completed`);
 });
@@ -150,27 +151,27 @@ queue.on('job:failed', (job, error) => {
   console.error(`Job ${job.id} failed:`, error.message);
 });
 
-// Add tasks with priorities
+// Add tasks with different priorities
 queue.add(
   async () => {
-    await sendEmail();
+    await sendEmail();  // High priority: send notification email
   },
   { priority: JobPriority.HIGH }
 );
 
 queue.add(
   async () => {
-    await generateReport();
+    await generateReport();  // Low priority: background report generation
   },
   { priority: JobPriority.LOW }
 );
 
-// Start processing
+// Start processing queued tasks
 queue.start();
 
-// Graceful shutdown
+// Graceful shutdown on termination signal
 process.on('SIGTERM', async () => {
-  await queue.stop();
+  await queue.stop();  // Wait for active jobs to complete
   console.log('Queue stopped gracefully');
 });
 ```
@@ -178,13 +179,15 @@ process.on('SIGTERM', async () => {
 ### Job Progress Tracking
 
 ```javascript
+// Add a job with progress tracking
 queue.add(async (progress) => {
   for (let i = 0; i < 100; i += 10) {
     await doWork();
-    progress(i);
+    progress(i);  // Report progress percentage
   }
 }, { id: 'my-job' });
 
+// Listen to progress updates
 queue.on('job:progress', (job, percent) => {
   console.log(`Job ${job.id} is ${percent}% complete`);
 });

@@ -392,4 +392,4 @@ Depending on your project, you may also need:
 - [API Documentation](05-api-docs.md) - API development guidelines
 - [Architecture Documentation](03-architecture.md) - System design overview
 - [Simple Project Example](../examples/simple-project/docs/development.md)
-- [Complex Project Example](../examples/complex-project/docs/development.md)
+- [Complex Project Example](../examples/complex-project/README.md) - See individual module documentation
